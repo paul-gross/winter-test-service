@@ -1,0 +1,16 @@
+[project]
+name = "winter-test-service"
+version = "0.1.0"
+description = "Full-stack app: React web, FastAPI API, Postgres, and a background worker"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi==0.115.6",
+    "uvicorn[standard]==0.32.1",
+    "psycopg[binary]==3.2.3",
+    "sqlalchemy>=2.0,<3.0",
+]
+
+# An application, not a library: the api and worker are run from source
+# (PYTHONPATH / -m), so uv manages the venv + deps without building this repo.
+[tool.uv]
+package = false

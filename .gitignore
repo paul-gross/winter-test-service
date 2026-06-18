@@ -1,0 +1,11 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Node / web
+web/node_modules/
+web/dist/
+
+# Local env overrides
+.env
