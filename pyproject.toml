@@ -8,6 +8,7 @@ dependencies = [
     "uvicorn[standard]==0.32.1",
     "psycopg[binary]==3.2.3",
     "sqlalchemy>=2.0,<3.0",
+    "pika==1.3.2",
 ]
 
 # An application, not a library: the api and worker are run from source
