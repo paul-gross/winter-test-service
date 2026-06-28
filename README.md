@@ -42,7 +42,7 @@ The worker resolves its AMQP URL in this order:
 2. else if `WINTER_ENV` is set (running inside a winter feature env) — `amqp://wts-<env>:wts-<env>@$RABBITMQ_HOST:$RABBITMQ_PORT/wts-<env>`, i.e. the per-env vhost + user provisioned by `winter provision <env>`.
 3. else — `amqp://guest:guest@localhost:5672/` (the default `/` vhost, for a plain local run).
 
-In a winter workspace, the vhost/user `wts-<env>` is created in the shared `wws-rabbitmq` broker by the `[[provision.resource]]` handler (`workspace:/.winter/config/provision/rabbitmq-vhost-apply.sh`). Run `winter provision <env>` after `winter ws init <env>`, then start the services. `winter provision <env> resource --destroy` removes the vhost.
+In a winter workspace, the vhost/user `wts-<env>` is created in the shared `wws-rabbitmq` broker by a `[[provision.resource]]` handler. Run `winter provision <env>` after `winter ws init <env>`, then start the services. `winter provision <env> resource --destroy` removes the vhost.
 
 ## Running locally
 
