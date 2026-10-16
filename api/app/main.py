@@ -2,17 +2,15 @@ import logging
 import os
 import sys
 import time
-
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, Request, Query
+from fastapi import FastAPI, HTTPException, Query, Request
 
 from app.deps import ItemServiceDep, ReadItemRepositoryDep, build_write_item_repository
 from app.schemas import HealthRead, ItemCreate, ItemRead
 from app.services.item_service import ItemValidationError
-from wts_persistence.domain.errors import RepositoryError
 from wts_logging import configure_logging
-
+from wts_persistence.domain.errors import RepositoryError
 
 # ---------------------------------------------------------------------------
 # Logging setup: INFO+ → stdout, WARNING+ → stderr (shared with the worker)

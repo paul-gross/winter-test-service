@@ -72,6 +72,17 @@ open http://localhost:9000
 
 `PYTHONPATH=.:api` puts the repo root (for the shared `wts_persistence`/`wts_logging` modules) and `api/` (for the `app` package) on `sys.path`; the worker needs only the root, which `python -m` already adds. The api binds `WTS_API_PORT` (`7503`) by default — no port argument needed. To point at your own Postgres instead of the container, set `DATABASE_URL`.
 
+## Development
+
+CI runs two commands; run the same two locally:
+
+```sh
+uv run ruff check .   # lint
+uv run pytest         # test suite
+```
+
+`uv sync` installs the dev tools (ruff, pytest, httpx) alongside the app dependencies. The suite needs no Postgres or RabbitMQ: it runs the repository against in-memory SQLite and the broker against a fake `pika` connection. pytest sets its own import paths (`.` and `api`), so no `PYTHONPATH` is needed.
+
 ## Database schema
 
 The api creates this table idempotently on startup; both the api and worker write to it:

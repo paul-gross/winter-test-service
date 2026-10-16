@@ -15,3 +15,21 @@ dependencies = [
 # (PYTHONPATH / -m), so uv manages the venv + deps without building this repo.
 [tool.uv]
 package = false
+
+[dependency-groups]
+dev = [
+    "ruff==0.17.1",
+    "pytest==8.3.4",
+    "httpx==0.28.1",
+]
+
+# The repo root holds the shared wts_* packages and wts_logging; api/ holds the
+# `app` package. These are the same two roots the run commands put on sys.path.
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "api"]
+
+# First-party roots for import sorting — the same two as pytest's pythonpath, so
+# `app` (under api/) sorts as first-party in api/ and tests/ alike.
+[tool.ruff]
+src = [".", "api"]

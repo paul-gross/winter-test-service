@@ -37,8 +37,8 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install
-        run: uv sync
-      # Placeholder: `uvx ruff check .` does not pass yet, and there is no test suite.
-      # Replace this step with them once both exist and pass.
-      - name: Lint and tests (placeholder)
-        run: "true"
+        run: uv sync --locked
+      - name: Lint
+        run: uv run ruff check .
+      - name: Test
+        run: uv run pytest
