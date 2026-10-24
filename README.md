@@ -121,3 +121,7 @@ docker exec wws-rabbitmq rabbitmqctl list_vhosts                  # confirm wts-
 - **[uv](https://docs.astral.sh/uv/)** — Python environment and dependency manager. Install: `curl -LsSf https://astral.sh/uv/install.sh | sh`.
 - Python 3.12+
 - Node 20+
+
+## License
+
+Source-available under the Functional Source License 1.1 (FSL-1.1-ALv2). Each release converts to Apache License 2.0 two years after it ships. See LICENSE.

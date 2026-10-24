@@ -2,6 +2,8 @@
 name = "winter-test-service"
 version = "0.1.0"
 description = "Full-stack app: React web, FastAPI API, Postgres, and a background worker"
+license = "FSL-1.1-ALv2"
+license-files = ["LICENSE"]
 requires-python = ">=3.12"
 dependencies = [
     "fastapi==0.115.6",

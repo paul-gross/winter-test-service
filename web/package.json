@@ -1,5 +1,6 @@
 {
   "name": "winter-test-service-web",
+  "license": "SEE LICENSE IN ../LICENSE",
   "private": true,
   "version": "0.0.1",
   "type": "module",
