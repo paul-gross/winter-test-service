@@ -86,9 +86,7 @@ def test_wait_for_broker_is_a_soft_dependency(sleeps):
 
 
 def test_wait_for_broker_returns_true_once_reachable(sleeps):
-    reached = worker_main._wait_for_broker(
-        FakePublisher(ping_results=(False, True))
-    )
+    reached = worker_main._wait_for_broker(FakePublisher(ping_results=(False, True)))
 
     assert reached is True
     assert sleeps == [1.0]

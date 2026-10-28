@@ -28,6 +28,7 @@ logger = logging.getLogger("worker")
 # Config
 # ---------------------------------------------------------------------------
 
+
 def _interval() -> float:
     return float(os.environ.get("WTS_WORKER_INTERVAL_SECONDS", "2"))
 
@@ -39,6 +40,7 @@ def _crash_after() -> int:
 # ---------------------------------------------------------------------------
 # Startup
 # ---------------------------------------------------------------------------
+
 
 def _wait_for_db(repo: IWriteItemRepository, timeout: float = 60.0) -> None:
     """Block until the DB answers a ping, with capped exponential backoff."""
@@ -74,7 +76,8 @@ def _wait_for_broker(publisher: IHeartbeatPublisher, timeout: float = 30.0) -> b
             logger.warning(
                 "broker (%s) not reachable after %d attempts — continuing; "
                 "publishes will retry per tick (is the vhost provisioned?)",
-                broker_label(), attempt,
+                broker_label(),
+                attempt,
             )
             return False
         wait = min(2.0 ** (attempt - 1), 8.0, remaining)
@@ -87,6 +90,7 @@ def _wait_for_broker(publisher: IHeartbeatPublisher, timeout: float = 30.0) -> b
 # ---------------------------------------------------------------------------
 # Main loop
 # ---------------------------------------------------------------------------
+
 
 def main() -> None:
     interval = _interval()
@@ -122,7 +126,9 @@ def main() -> None:
         # issues the same way as DB writes — the publisher reconnects, so we
         # just retry on the next tick.
         try:
-            publisher.publish({"env": os.environ.get("WINTER_ENV"), "tick": tick, "label": label})
+            publisher.publish(
+                {"env": os.environ.get("WINTER_ENV"), "tick": tick, "label": label}
+            )
             logger.info("tick %d: published heartbeat", tick)
         except PublishError as exc:
             logger.warning(
@@ -136,7 +142,8 @@ def main() -> None:
         if crash_after > 0 and tick >= crash_after:
             logger.warning(
                 "WTS_WORKER_CRASH_AFTER=%d reached at tick %d — exiting with code 1",
-                crash_after, tick,
+                crash_after,
+                tick,
             )
             publisher.close()
             sys.exit(1)

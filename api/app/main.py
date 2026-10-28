@@ -24,6 +24,7 @@ logger = logging.getLogger("api")
 # Startup
 # ---------------------------------------------------------------------------
 
+
 def _boot_delay() -> None:
     delay = float(os.environ.get("WTS_BOOT_DELAY_SECONDS", "0"))
     if delay > 0:
@@ -46,7 +47,8 @@ def _init_schema_with_backoff(timeout: float = 30.0) -> None:
             if remaining <= 0:
                 logger.warning(
                     "DB schema init failed after %d attempts, continuing without DB: %s",
-                    attempt, exc,
+                    attempt,
+                    exc,
                 )
                 return
             wait = min(2.0 ** (attempt - 1), 5.0)
@@ -71,6 +73,7 @@ app = FastAPI(lifespan=lifespan)
 # Request logging middleware
 # ---------------------------------------------------------------------------
 
+
 @app.middleware("http")
 async def _log_requests(request: Request, call_next):
     response = await call_next(request)
@@ -81,6 +84,7 @@ async def _log_requests(request: Request, call_next):
 # ---------------------------------------------------------------------------
 # Routes — reads go direct through the read seam; the mutation through the service
 # ---------------------------------------------------------------------------
+
 
 @app.get("/api/health", response_model=HealthRead)
 def health(items: ReadItemRepositoryDep):

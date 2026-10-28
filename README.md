@@ -119,7 +119,7 @@ docker exec wws-rabbitmq rabbitmqctl list_vhosts                  # confirm wts-
 
 - **Docker**
 - **[uv](https://docs.astral.sh/uv/)** — Python environment and dependency manager. Install: `curl -LsSf https://astral.sh/uv/install.sh | sh`.
-- Python 3.12+
+- Python 3.13+
 - Node 20+
 
 ## License

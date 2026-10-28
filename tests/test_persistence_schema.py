@@ -15,7 +15,9 @@ def _postgres_ddl() -> str:
 
 
 def _column_line(ddl: str, name: str) -> str:
-    return next(ln.strip() for ln in ddl.splitlines() if ln.strip().startswith(name + " "))
+    return next(
+        ln.strip() for ln in ddl.splitlines() if ln.strip().startswith(name + " ")
+    )
 
 
 def test_id_is_a_bigserial_primary_key():
