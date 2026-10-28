@@ -52,5 +52,7 @@ def get_item_service(
     return ItemService(repo)
 
 
-ReadItemRepositoryDep = Annotated[IReadItemRepository, Depends(get_read_item_repository)]
+ReadItemRepositoryDep = Annotated[
+    IReadItemRepository, Depends(get_read_item_repository)
+]
 ItemServiceDep = Annotated[ItemService, Depends(get_item_service)]
